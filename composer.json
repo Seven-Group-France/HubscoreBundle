@@ -1,0 +1,42 @@
+{
+  "name": "seven-group-test/hubscore-bundle",
+  "description": "Hub Score bundle",
+  "type": "library",
+  "keywords": [],
+  "license": "MIT",
+  "require": {
+      "php": ">=8.1",
+      "symfony/framework-bundle": "^6.4",
+      "symfony/dependency-injection": "^6.4",
+      "symfony/http-client": "^6.4"
+  },
+  "authors": [
+      {
+          "name": "Seven Group",
+          "email": "dir-tech@seven-group.com",
+          "homepage": "https://seven-group.com/fr"
+      },
+      {
+          "name": "Mathieu JULLIEN",
+          "email": "hello@mathieujullien.fr",
+          "homepage": "https://mathieujullien.fr"
+      }
+  ],
+  "autoload": {
+      "psr-4": {
+          "Sevengroup\\HubscoreBundle\\": "src/"
+      }
+  },
+  "repositories": [
+      {
+          "type": "vcs",
+          "url": "https://github.com/mathieu-jullien/SevengroupHubscoreBundle/"
+      }
+  ],
+  "minimum-stability": "stable",
+  "scripts": {
+      "post-install-cmd": [
+          "Sevengroup\\HubscoreBundle\\Installer::copyConfigFile"
+      ]
+  }
+}
