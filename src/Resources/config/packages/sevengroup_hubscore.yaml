@@ -1,4 +1,4 @@
-sevengroup_security:
+sevengroup_hubscore:
     api_url: 'https://api.hub-score.com'
     api_version: 'v1'
     endpoints:
