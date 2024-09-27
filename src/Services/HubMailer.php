@@ -3,7 +3,6 @@
 namespace Sevengroup\HubscoreBundle\Services;
 
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
-use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class HubMailer
@@ -12,20 +11,17 @@ class HubMailer
     private ?string $apiVersion;
     private ?array $endpoints;
     private HttpClientInterface $httpClient;
-    private RequestStack $requestStack;
     private ?string $token;
 
     public function __construct(
       ParameterBagInterface $parameterBag,
-      HttpClientInterface $httpClient,
-      RequestStack $requestStack
+      HttpClientInterface $httpClient
     )
     {
         $this->apiUrl = $parameterBag->get('sevengroup_hubscore.api_url');
         $this->apiVersion = $parameterBag->get('sevengroup_hubscore.api_version');
         $this->endpoints = $parameterBag->get('sevengroup_hubscore.endpoints');
         $this->httpClient = $httpClient;
-        $this->requestStack = $requestStack;
     }
 
     public function connection(string $username, string $password): array
@@ -56,7 +52,7 @@ class HubMailer
 
     public function list(string $endpoint, array $data = []): array
     {
-      if(!array_key_exists($endpoint, $this->endpoints) && !array_key_exists('list', $this->endpoints[$endpoint])) {
+      if(array_key_exists($endpoint, $this->endpoints) && array_key_exists('list', $this->endpoints[$endpoint])) {
         return $this->sendRequest('GET', $this->endpoints[$endpoint]['list'], $data);
       } else {
         throw new \RuntimeException('Endpoint not found');
@@ -65,7 +61,7 @@ class HubMailer
 
     public function get(string $endpoint, int $id, array $data = []): array
     {
-      if(!array_key_exists($endpoint, $this->endpoints) && !array_key_exists('get', $this->endpoints[$endpoint])) {
+      if(array_key_exists($endpoint, $this->endpoints) && array_key_exists('get', $this->endpoints[$endpoint])) {
         return $this->sendRequest('GET', str_replace('{id}', $id, $this->endpoints[$endpoint]['get']), $data);
       } else {
         throw new \RuntimeException('Endpoint not found');
@@ -74,7 +70,7 @@ class HubMailer
 
     public function post(string $endpoint, array $data = []): array
     {
-      if(!array_key_exists($endpoint, $this->endpoints) && !array_key_exists('post', $this->endpoints[$endpoint])) {
+      if(array_key_exists($endpoint, $this->endpoints) && array_key_exists('post', $this->endpoints[$endpoint])) {
         return $this->sendRequest('POST', $this->endpoints[$endpoint]['post'], $data);
       } else {
         throw new \RuntimeException('Endpoint not found');
@@ -83,7 +79,7 @@ class HubMailer
 
     public function put(string $endpoint, int $id, array $data = []): array
     {
-      if(!array_key_exists($endpoint, $this->endpoints) && !array_key_exists('put', $this->endpoints[$endpoint])) {
+      if(array_key_exists($endpoint, $this->endpoints) && array_key_exists('put', $this->endpoints[$endpoint])) {
         return $this->sendRequest('PUT', str_replace('{id}', $id, $this->endpoints[$endpoint]['put']), $data);
       } else {
         throw new \RuntimeException('Endpoint not found');
@@ -92,7 +88,7 @@ class HubMailer
 
     public function delete(string $endpoint, int $id, array $data = []): array
     {
-      if(!array_key_exists($endpoint, $this->endpoints) && !array_key_exists('delete', $this->endpoints[$endpoint])) {
+      if(array_key_exists($endpoint, $this->endpoints) && array_key_exists('delete', $this->endpoints[$endpoint])) {
         return $this->sendRequest('DELETE', str_replace('{id}', $id, $this->endpoints[$endpoint]['delete']), $data);
       } else {
         throw new \RuntimeException('Endpoint not found');
@@ -101,7 +97,7 @@ class HubMailer
 
     public function send(string $endpoint = 'campaign', array $data = []): array
     {
-      if(!array_key_exists($endpoint, $this->endpoints) && !array_key_exists('send', $this->endpoints[$endpoint])) {
+      if(array_key_exists($endpoint, $this->endpoints) && array_key_exists('send', $this->endpoints[$endpoint])) {
         return $this->sendRequest('POST', $this->endpoints[$endpoint]['send'], $data);
       } else {
         throw new \RuntimeException('Endpoint not found');
@@ -126,6 +122,10 @@ class HubMailer
 
         if($this->token === null) {
           throw new \RuntimeException('Token not set, please use the connection method or setToken method');
+        }
+
+        if(!array_key_exists('Authorization', $headers)) {
+          $headers['Authorization'] = 'Bearer ' . $this->token;
         }
 
         try {
