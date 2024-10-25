@@ -1,0 +1,14 @@
+{
+  "recipes": {
+      "sevengroupfrance/hubscore-bundle": [
+          "1.0.0"
+      ]
+  },
+  "branch": "main",
+  "is_contrib": true,
+  "_links": {
+      "repository": "github.com/Seven-Group-France/HubscoreBundle",
+      "origin_template": "{package}:{version}@github.com/Seven-Group-France/HubscoreBundle:main",
+      "recipe_template": "https://api.github.com/repos/Seven-Group-France/HubscoreBundle/contents/{package_dotted}.{version}.json"
+  }
+}

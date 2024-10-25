@@ -1,0 +1,28 @@
+sevengroup_hubscore:
+    api_url: 'https://api.hub-score.com'
+    api_version: 'v1'
+    endpoints:
+        login: '/login_check'
+        mail:
+          list: '/mails'
+          post: '/mails'
+          get: '/mails/{id}'
+        campaign:
+          list: '/mailsends'
+          post: '/mailsends'
+          get: '/mailsends/{id}'
+          put: '/mailsends/{id}'
+          delete: '/mailsends/{id}'
+          send: '/sends/mails'
+        database:
+          list: '/databases'
+          post: '/databases'
+          get: '/databases/{id}'
+          put: '/databases/{id}'
+          delete: '/databases/{id}'
+        records: 
+          list: '/databases/{id}/records'
+          post: '/databases/{id}/records'
+          get: '/databases/{id}/records/{recordId}'
+          put: '/databases/{id}/records/{recordId}'
+          delete: '/databases/{id}/records/{recordId}'

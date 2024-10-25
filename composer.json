@@ -1,7 +1,7 @@
 {
-  "name": "seven-group-test/hubscore-bundle",
+  "name": "sevengroupfrance/hubscore-bundle",
   "description": "Hub Score bundle",
-  "type": "library",
+  "type": "symfony-bundle",
   "keywords": [],
   "license": "MIT",
   "require": {
@@ -30,13 +30,16 @@
   "repositories": [
       {
           "type": "vcs",
-          "url": "https://github.com/mathieu-jullien/SevengroupHubscoreBundle/"
+          "url": "https://github.com/Seven-Group-France/HubscoreBundle/"
       }
   ],
-  "minimum-stability": "stable",
-  "scripts": {
-      "post-install-cmd": [
-          "Sevengroup\\HubscoreBundle\\Installer::copyConfigFile"
-      ]
-  }
+  "extra": {
+        "symfony": {
+            "endpoint": [
+                "https://api.github.com/repos/sevenGroupFrance/sulu-hub-score-form-sender-bundle/contents/index.json",
+                "flex://defaults"
+            ]
+        }
+    }
+  
 }
