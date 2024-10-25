@@ -27,6 +27,7 @@
           "Sevengroup\\HubscoreBundle\\": "src/"
       }
   },
+  "minimum-stability": "stable",
   "repositories": [
       {
           "type": "vcs",
