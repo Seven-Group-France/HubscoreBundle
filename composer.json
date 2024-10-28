@@ -1,7 +1,7 @@
 {
   "name": "sevengroupfrance/hubscore-bundle",
   "description": "Hub Score bundle",
-  "type": "symfony-bundle",
+  "type": "library",
   "keywords": [],
   "license": "MIT",
   "require": {
