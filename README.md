@@ -9,6 +9,8 @@ Copier le fichier config/packages/sevengroup_hubscore.yaml dans le dossier confi
 composer require sevengroupfrance/hubscore-bundle
 ```
 
+[Packagist](https://packagist.org/packages/sevengroupfrance/hubscore-bundle)
+
 ## Utilisation
 
 Include 
